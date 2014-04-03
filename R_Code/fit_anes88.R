@@ -55,7 +55,7 @@ Z <- cbind(1, educ_years, black, age, agesquared, post_int_days)
 # ensure that the maximum is global. This seems to work better and faster than 
 # other algorithms such as genoud
 lik <- -9999999
-for (z in 1:2) {
+for (z in 1:200) {
   print(z)
   cand <- pobs(y, X, Z)
   if (lik < cand$lik) {
