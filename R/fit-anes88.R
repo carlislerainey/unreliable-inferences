@@ -5,6 +5,7 @@ rm(list = ls())
 library(foreign) # to load a Stata data set
 library(arm)     # misc functions
 library(compactr)  # graphics
+library(devEMF)
 
 # set working directory
 setwd("~/Dropbox/projects/unreliable-inferences")
@@ -71,7 +72,7 @@ var.names <- c("Intercept", "Education\n(in years)", "Black", "Age", "Age Square
 # Coefficient Plots
 ###################
 
-pdf("doc/figs/coef_plot.pdf", height = 3, width = 8.5, family = "serif")
+emf("doc/figs/coef_plot.emf", height = 3, width = 8.5, family = "serif")
 par(mfrow = c(1,2), mar = rep(.75, 4), oma = c(2,4.5,1,0),
     family = "serif")
 ## Main Equation
@@ -161,7 +162,7 @@ q.me.self <- apply(me.self, 2, quantile, c(.05, .5, .95))
 q.me.valid <- apply(me.valid, 2, quantile, c(.05, .5, .95))
 q.me.part <- apply(me.part, 2, quantile, c(.05, .5, .95))
 
-pdf("doc/figs/pr.pdf", height = 2, width = 6.5, family = "serif")
+emf("doc/figs/pr.emf", height = 2, width = 6.5, family = "serif")
 par(mfrow = c(1, 3), mar = rep(.75, 4), oma = c(2,3,2,.5), family = "serif")
 eplot(xlim = mm(x.educ), ylim = c(0, 1),
       xlab = "Years of Education",
@@ -187,7 +188,7 @@ dev.off()
 # Marginal Effects
 ##################
 
-pdf("doc/figs/me.pdf", height = 2, width = 6.5, family = "serif")
+emf("doc/figs/me.emf", height = 2, width = 6.5, family = "serif")
 par(mfrow = c(1, 3), mar = rep(.75, 4), oma = c(2,3,2,.5), family = "serif")
 eplot(xlim = mm(x.educ), ylim = c(0, 0.8),
       xlab = "Years of Education",
@@ -224,7 +225,7 @@ q.fd.valid
 q.fd.self
 q.fd.part
 
-pdf("doc/figs/fd.pdf", height = 3, width = 5, family = "serif")
+emf("doc/figs/fd.emf", height = 3, width = 5, family = "serif")
 par(mfrow = c(1,1), mar = c(0,0,0,0), oma = c(4.5, 9.5, .5, .5), family = "serif")
 eplot(xlim = c(0, .5), ylim = c(.5, 3.5), 
       yat = 1:3, yticklab = c("Partial Observability Logit\nUsing Self-Reported Data",

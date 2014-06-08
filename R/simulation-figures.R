@@ -1,5 +1,6 @@
 library(compactr)
 library(mgcv)
+library(devEMF)
 
 rm(list = ls())
 setwd("~/Dropbox/projects/unreliable-inferences")
@@ -17,7 +18,7 @@ p <- predict(m.sign.error, newdata = data.frame(X), type = "response")
 
 
 ## Histograms of Predicted Probabilities
-pdf("doc/figs/sims_pr.pdf", height = 3, width = 7, family = "serif")
+emf("doc/figs/sims_pr.emf", height = 3, width = 7, family = "serif")
 par(mfrow = c(1, 2), mar = c(1,1,1,1), oma = c(3,2,1,.5), 
     xaxs = "i",yaxs = "i", family = "serif")
 breaks <- seq(min(prob.part - prob.true), max(prob.true - prob.part),
@@ -43,7 +44,7 @@ quantile(prob.part - prob.true, c(.05, .5, .95))
 dev.off()
 
 ## Histograms of Effects
-pdf("doc/figs/sims_fd.pdf", height = 3, width = 7, family = "serif")
+emf("doc/figs/sims_fd.emf", height = 3, width = 7, family = "serif")
 par(mfrow = c(1, 2), mar = c(1,1,1,1), oma = c(3,2,1,.5), 
     xaxs = "i",yaxs = "i", family = "serif")
 breaks <- seq(min(c(fd.part - fd.true, fd.full - fd.true)), 
@@ -70,7 +71,7 @@ quantile(fd.part - fd.true, c(.05, .5, .95))
 dev.off()
 
 # Scatterplots Comparing True to Estimated Probabilities
-pdf("doc/figs/sims_pr_comp.pdf", height = 3, width = 7, family = "serif")
+emf("doc/figs/sims_pr_comp.emf", height = 3, width = 7, family = "serif")
 par(mfrow = c(1, 2), mar = c(1,1,1,1), oma = c(3,3,1,.5), 
     xaxs = "i",yaxs = "i", family = "serif")
 eplot(xlim = c(0, 1), ylim = c(0, 1), 
@@ -87,7 +88,7 @@ abline(v = 0, lty = 3)
 dev.off()
 
 # Scatterplots Comparing True to Estimated Probabilities
-pdf("doc/figs/sims_me_comp.pdf", height = 3, width = 7, family = "serif")
+emf("doc/figs/sims_me_comp.emf", height = 3, width = 7, family = "serif")
 par(mfrow = c(1, 2), mar = c(1,1,1,1), oma = c(3,3,1,.5), 
     xaxs = "i",yaxs = "i", family = "serif")
 eplot(xlim = c(-1, 1), ylim = c(-1, 1), 
