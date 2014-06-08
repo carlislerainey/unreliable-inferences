@@ -7,13 +7,13 @@ library(arm)     # misc functions
 library(compactr)  # graphics
 
 # set working directory
-setwd("~/Dropbox/Projects/Unreliable")
+setwd("~/Dropbox/projects/unreliable-inferences")
 
 # load functions to estimate partial-observability models
-source("R_Code/fn_pobs.R")
+source("R/fn_pobs.R")
 
 # load and clean data
-d <- read.dta("Data/anes88_new.dta")[, c("validated_turnout", "self_report_turnout", "post_int_days", "black",
+d <- read.dta("data/anes88.dta")[, c("validated_turnout", "self_report_turnout", "post_int_days", "black",
                                            "educ_years", "age", "agesquared")]
 
 d0 <- d[, c("validated_turnout", "self_report_turnout", "post_int_days", "black",
@@ -71,7 +71,7 @@ var.names <- c("Intercept", "Education\n(in years)", "Black", "Age", "Age Square
 # Coefficient Plots
 ###################
 
-pdf("Manuscript/Figures/coef_plot.pdf", height = 3, width = 8.5, family = "serif")
+pdf("doc/figs/coef_plot.pdf", height = 3, width = 8.5, family = "serif")
 par(mfrow = c(1,2), mar = rep(.75, 4), oma = c(2,4.5,1,0),
     family = "serif")
 ## Main Equation
@@ -161,7 +161,7 @@ q.me.self <- apply(me.self, 2, quantile, c(.05, .5, .95))
 q.me.valid <- apply(me.valid, 2, quantile, c(.05, .5, .95))
 q.me.part <- apply(me.part, 2, quantile, c(.05, .5, .95))
 
-pdf("Manuscript/Figures/pr.pdf", height = 2, width = 6.5, family = "serif")
+pdf("doc/figs/pr.pdf", height = 2, width = 6.5, family = "serif")
 par(mfrow = c(1, 3), mar = rep(.75, 4), oma = c(2,3,2,.5), family = "serif")
 eplot(xlim = mm(x.educ), ylim = c(0, 1),
       xlab = "Years of Education",
@@ -187,7 +187,7 @@ dev.off()
 # Marginal Effects
 ##################
 
-pdf("Manuscript/Figures/me.pdf", height = 2, width = 6.5, family = "serif")
+pdf("doc/figs/me.pdf", height = 2, width = 6.5, family = "serif")
 par(mfrow = c(1, 3), mar = rep(.75, 4), oma = c(2,3,2,.5), family = "serif")
 eplot(xlim = mm(x.educ), ylim = c(0, 0.8),
       xlab = "Years of Education",
@@ -224,7 +224,7 @@ q.fd.valid
 q.fd.self
 q.fd.part
 
-pdf("Manuscript/Figures/fd.pdf", height = 3, width = 5, family = "serif")
+pdf("doc/figs/fd.pdf", height = 3, width = 5, family = "serif")
 par(mfrow = c(1,1), mar = c(0,0,0,0), oma = c(4.5, 9.5, .5, .5), family = "serif")
 eplot(xlim = c(0, .5), ylim = c(.5, 3.5), 
       yat = 1:3, yticklab = c("Partial Observability Logit\nUsing Self-Reported Data",

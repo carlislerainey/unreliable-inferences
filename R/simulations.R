@@ -88,8 +88,8 @@
 #               lik = lik)
 # }
 # 
-# setwd("~/Dropbox/Unreliable")
-# d <- read.csv("simulations.csv")
+# setwd("~/Dropbox/projects/unreliable-inferences")
+# d <- read.csv("output/simulations.csv")
 # start <- as.numeric(rownames(d)[nrow(d)]) + 1
 # for (new.sims in start:500) {
 # 
@@ -154,7 +154,6 @@
 #   fd.full[sim] <- pred[750] - pred[250]
 #   prob.full[sim] <- pred[500]
 #   
-#   source('~/Dropbox/Unreliable/fn_pobs_mle_gen.R')
 #   X <- cbind(1, x1)
 #   Z <- cbind(1, x1, x2)
 #   #n.param <- ncol(X) + ncol(Z)
@@ -186,11 +185,11 @@
 # }
 # 
 # 
-# setwd("~/Dropbox/Unreliable")
-# d <- read.csv("simulations.csv")
+# setwd("~/Dropbox/unreliable-inferences")
+# d <- read.csv("ouput/simulations.csv")
 # prev.row.name <- as.numeric(rownames(d)[nrow(d)])
 # res <- cbind(new.sims, fd.true, fd.full, fd.part, prob.true, prob.full, prob.part)
-# write.table(res, file = "simulations.csv", 
+# write.table(res, file = "output/simulations.csv", 
 #             append = TRUE, col.names = FALSE, 
 #             sep = ",", row.names = as.character(prev.row.name + 1:n.sims))
 # 
@@ -199,8 +198,8 @@
 library(mgcv)
 
 rm(list = ls())
-setwd("~/Dropbox/Projects/Unreliable")
-d <- read.csv("Simulations/simulations.csv")
+setwd("~/Dropbox/projects/unreliable-inferences")
+d <- read.csv("output/simulations.csv")
 attach(d)
 x0 <- seq(-.5, .5, length.out = 1000)
 sign.error <- 1*(sign(fd.part) != sign(fd.true))
@@ -214,7 +213,7 @@ p <- predict(m.sign.error, newdata = data.frame(X), type = "response")
 
 
 ## Histograms of Predicted Probabilities
-pdf("Manuscript/Figures/sims_pr.pdf", height = 3, width = 7, family = "serif")
+pdf("doc/figs/sims_pr.pdf", height = 3, width = 7, family = "serif")
 par(mfrow = c(1, 2), mar = c(1,1,1,1), oma = c(3,2,1,.5), 
     xaxs = "i",yaxs = "i", family = "serif")
 breaks <- seq(min(prob.part - prob.true), max(prob.true - prob.part),
@@ -240,7 +239,7 @@ quantile(prob.part - prob.true, c(.05, .5, .95))
 dev.off()
 
 ## Histograms of Effects
-pdf("Manuscript/Figures/sims_fd.pdf", height = 3, width = 7, family = "serif")
+pdf("doc/figs/sims_fd.pdf", height = 3, width = 7, family = "serif")
 par(mfrow = c(1, 2), mar = c(1,1,1,1), oma = c(3,2,1,.5), 
     xaxs = "i",yaxs = "i", family = "serif")
 breaks <- seq(min(c(fd.part - fd.true, fd.full - fd.true)), 
@@ -267,7 +266,7 @@ quantile(fd.part - fd.true, c(.05, .5, .95))
 dev.off()
 
 # Scatterplots Comparing True to Estimated Probabilities
-pdf("Manuscript/Figures/sims_pr_comp.pdf", height = 3, width = 7, family = "serif")
+pdf("doc/figs/sims_pr_comp.pdf", height = 3, width = 7, family = "serif")
 par(mfrow = c(1, 2), mar = c(1,1,1,1), oma = c(3,3,1,.5), 
     xaxs = "i",yaxs = "i", family = "serif")
 eplot(xlim = c(0, 1), ylim = c(0, 1), 
@@ -284,7 +283,7 @@ abline(v = 0, lty = 3)
 dev.off()
 
 # Scatterplots Comparing True to Estimated Probabilities
-pdf("Manuscript/Figures/sims_me_comp.pdf", height = 3, width = 7, family = "serif")
+pdf("doc/figs/sims_me_comp.pdf", height = 3, width = 7, family = "serif")
 par(mfrow = c(1, 2), mar = c(1,1,1,1), oma = c(3,3,1,.5), 
     xaxs = "i",yaxs = "i", family = "serif")
 eplot(xlim = c(-1, 1), ylim = c(-1, 1), 
