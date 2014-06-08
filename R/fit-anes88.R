@@ -2,7 +2,6 @@
 rm(list = ls())
 
 # load packages
-library(foreign) # to load a Stata data set
 library(arm)     # misc functions
 library(compactr)  # graphics
 library(devEMF)
@@ -14,9 +13,8 @@ setwd("~/Dropbox/projects/unreliable-inferences")
 source("R/fn_pobs.R")
 
 # load and clean data
-d <- read.dta("data/anes88.dta")[, c("validated_turnout", "self_report_turnout", "post_int_days", "black",
+d <- read.csv("data/anes88.csv")[, c("validated_turnout", "self_report_turnout", "post_int_days", "black",
                                            "educ_years", "age", "agesquared")]
-
 d0 <- d[, c("validated_turnout", "self_report_turnout", "post_int_days", "black",
             "educ_years", "age", "agesquared")]
 d0 <- na.omit(d0)
