@@ -2,11 +2,22 @@
 .*
 *.DS_Store
 *.Rhistory
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.bib.bak 
+*.ttt
+*.fff
 output
 codebooks
 tabs
 figs
 memo
+present
 Old_Files/
 !.gitignore
 
