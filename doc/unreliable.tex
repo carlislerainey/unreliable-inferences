@@ -106,7 +106,7 @@ urlcolor=blue % color of external links
 %\linenumbers
 \begin{center}
 {\LARGE \textbf{Unreliable Inferences about Unobserved Processes}\\\vspace{2mm}
-{\large \textbf{A Critique of Partial Observability Models}}\symbolfootnote[1]{We thank Will Moore, Austin Mitchell, participants at the 2012 Southern Political Science Association Annual Conference, and participants at the 2012 Midwest Political Science Association Annual Conference for valuable comments on previous versions of the manuscript. All code and data necessary to replicate the simulations and empirical analysis are available at \url{github.com/carlislerainey/unreliable-inferences}.}}
+{\large \textbf{A Critique of Partial Observability Models}}\symbolfootnote[1]{We thank Will Moore, Austin Mitchell, participants at the 2012 Southern Political Science Association Annual Conference, and participants at the 2012 Midwest Political Science Association Annual Conference for valuable comments on previous versions of the manuscript. All code and data necessary to replicate the simulations and empirical analysis are available at \url{http://github.com/carlislerainey/unreliable-inferences}.}}
 
 \vspace{10mm}
 
@@ -124,7 +124,7 @@ Robert A. Jackson\symbolfootnote[3]{Robert A. Jackson is Professor of Political 
 \begin{quote}\noindent
 Methodologists and econometricians advocate the partial observability model as a tool that enables researchers to estimate the distinct effects of a single explanatory variable on two partially observable outcome variables. 
 However, we show that when the explanatory variable of interest influences both partially observable outcomes, the partial observability model estimates are unusually sensitive to misspecification. 
-We use Monte Carlo simulations to demonstrate that minor, unavoidable misspecification of the functional form can lead to large bias under partial observability, even though such misspecification leads to little or no bias under full observability.
+We use Monte Carlo simulations to show that minor, unavoidable misspecification of the functional form can lead to large bias under partial observability, even though such misspecification leads to little or no bias under full observability.
  \end{quote}
 \vspace{10mm}
 % Add quote to first page
@@ -145,7 +145,7 @@ Word Count: 4,426
 
 \section*{Introduction}
 
-Social scientists often face situations, known as ``partial observability,'' in which two (or perhaps more) distinct processes lead to distinct binary outcomes that can only be observed jointly. 
+Social scientists often face situations, known as ``partial observability,'' where two (or perhaps more) distinct processes lead to distinct binary outcomes that can only be observed jointly. 
 Braumoeller (2003) provides many examples of established literature theorizing such relationships. 
 Econometricians and methodologists argue that researchers can use a partial observability model to parse out the effects of a single explanatory variable on each unobserved outcome (Poirier 1980; Abowd and Farber 1982; Pzeworski and Vreeland 2002; Xiang 2007; Nieman 2015).  
 
@@ -157,27 +157,27 @@ We show that seemingly innocuous and unavoidable specification errors that lead 
 
 \section*{A Partial Observability Logit Model}
 
-Partial observability occurs when the researcher can only observe a binary outcome of interest $d_{main}$ jointly with another binary outcome $d_{nuisance}$.\footnote{For clarity, we imagine a situation in which one outcome is of interest and the other is largely nuisance. 
-However, our ideas generalize to a situation in which the researcher's interest extends to both outcomes.}
-The researcher can directly observe the binary outcome $y$, which equals one if both $d_{main}$ and $d_{nuisance}$ equal one and zero otherwise.\footnote{One can also employ a partial observability model in which $y$ equals one if either $d_{main}$ of $d_{nuisance}$ equals one. 
+Partial observability occurs when the researcher can only observe a binary outcome of interest $d_{main}$ jointly with another binary outcome $d_{nuisance}$.\footnote{For clarity, we imagine a situation where one outcome is of interest and the other is largely nuisance. 
+However, our ideas generalize to a situation where the researcher's interest extends to both outcomes.}
+The researcher can directly observe the binary outcome $y$, which equals one if both $d_{main}$ and $d_{nuisance}$ equal one and zero otherwise.\footnote{One can also employ a partial observability model where $y$ equals one if either $d_{main}$ of $d_{nuisance}$ equals one. 
 For simplicity, we focus on a situation where $y$ equals one if both $d_{main}$ and $d_{nuisance}$ equal one. 
 Our conclusions do not depend on this choice.}
 
-To model the observed outcome $y$, we simply assume that $d_{main}$ and $d_{nuisance}$ are independent events so that $\Pr(y) = \Pr(d_{main})\Pr(d_{nuisance})$.\footnote{Especially in the case of the partial observability probit model, the researcher can relax the assumption of independence. 
+To model the observed outcome $y$, we assume that $d_{main}$ and $d_{nuisance}$ are independent events so that $\Pr(y) = \Pr(d_{main})\Pr(d_{nuisance})$.\footnote{Especially in the case of the partial observability probit model, the researcher can relax the assumption of independence. 
 We make the assumption of independence to simplify the presentation and the computation.} 
 Next, we assume a standard model relating a set of covariates $X = [1, w_1, w_2,..., w_{k_w}, x_1, x_2,..., x_{k_x}]$ to $\Pr(d_{main})$ and a set of covariates $Z = [1, w_1, w_2,..., w_{k_w}, z_1, z_2,..., z_{k_z}]$ to $\Pr(d_{nuisance})$, so that $\Pr(d_{main}) = g^{-1}(X\beta)$ and $\Pr(d_{nuisance}) = g^{-1}(Z\gamma)$.
 Note that the covariates $w_j$ for $j \in \{1, 2,..., k_w\}$ belong to both $X$ and $Z$. 
-This is crucial---our critique focuses on the situation in which the researcher wishes to parse out the distinct effects of one or more explanatory variables on \textit{both} unobservable outcome variables.\footnote{Even if the researcher \textit{assumes} that each explanatory variable influences only one of the observable outcomes, we usually have only weak theory guiding the choice and no empirical tools to verify the assumption.} 
+This is crucial---our critique focuses on the situation where the researcher wishes to parse out the distinct effects of one or more explanatory variables on \textit{both} unobservable outcome variables.\footnote{Even if the researcher \textit{assumes} that each explanatory variable influences only one of the observable outcomes, we usually have only weak theory guiding the choice and no empirical tools to verify the assumption.} 
 The researcher's theory rarely offers a compelling rationale for a particular link function $g$, making the choice essentially arbitrary (King 1998, p. 100, and Berry, DeMeritt, and Esarey 2010).
 In our partial observability model, we let $g$ be the logit function, but other standard choices include probit, cloglog, and cauchit.
 Using this form, it is straightforward to find the log-likelihood function for $\beta$ and $\gamma$, although the maximization is not trivial.\footnote{We find that standard hill-climbing optimization routines find local maxima. 
 This presents a separate, perhaps equally concerning problem to substantive applications. 
 To avoid this, we tried an algorithm suggested by Sekhon and Mebane (1998) that relies on a combination of genetic adaptation and hill-climbing to efficiently locate the maximum (Mebane and Sekhon 2011). 
 This approach consistently located the global maximum in several trial examples, but only for a very large population (i.e., computationally prohibitive) of agents. 
-We found that simply starting a standard hill-climbing algorithm at several sets of random starting values consistently located the global maximum. 
+We found that starting a standard hill-climbing algorithm at several sets of random starting values consistently located the global maximum. 
 We use ten sets of starting values in our estimation.} 
 We assume that the researcher uses the estimates of $\beta$ and $\gamma$ to calculate some quantity of interest (e.g., first difference). 
-As a comparison, we also consider a full observability logit model (i.e., the usual logit model), in which the researcher observes $d_{main}$ and uses the model $\Pr(d_{main}) = \text{logit}^{-1}(X\beta)$ to estimate the quantity of interest.
+As a comparison, we also consider a full observability logit model (i.e., the usual logit model), where the researcher observes $d_{main}$ and uses the model $\Pr(d_{main}) = \text{logit}^{-1}(X\beta)$ to estimate the quantity of interest.
 
 \section*{A Motivating Example}
 
@@ -187,7 +187,7 @@ To illustrate the potential bias with a simple example, suppose the researcher w
 \Pr(d_{nuisance}) = \text{logit}^{-1}(\gamma x - z)\nonumber\\
 \Pr(y) = \Pr(d_{main})\Pr(d_{nuisance})\text{,}\nonumber
 \end{gather*}
-where $y$ represents the binary outcome of interest, $x$ and $z$ represent two binary explanatory variables, and $\beta$ and $\gamma$ represent parameters to be estimated.. 
+where $y$ represents the binary outcome of interest, $x$ and $z$ represent two binary explanatory variables, and $\beta$ and $\gamma$ represent parameters to be estimated. 
 Suppose further that $(\beta, \gamma) = (-1, 1)$ or $(\beta, \gamma) = (1, -1)$ so that the researcher knows the absolute value of $\beta$ and $\gamma$ is 1, but is not sure which parameter is negative.
 
 Because $x$ and $z$ are binary, there are four conditions, and we can easily compute the expected proportions under each for both sets of possible parameters. 
@@ -223,7 +223,7 @@ This raises the question: How much would we need to alter the logit link functio
 Our goal is to replace the function logit$^{-1}$ with a new function $h^{-1}$ to obtain Panel A of Table \ref{tab:ep} with parameters $(\beta, \gamma) = (1, -1)$. 
 The only time we use $\text{logit}^{-1} (-2)$ in the calculation is for the bottom-right cell. In that case, let $h^{-1}(x) = \text{logit}^{-1}(x)$ for $x \in c\{ -1, 0, 1\}$. 
 This ensures that all but the bottom-right cell remains unchanged. 
-Then we simply require that 
+Then we require that 
 \begin{align*}
 h^{-1}(-2)h^{-1}(1) &= 0.13\\
 h^{-1}(-2)\text{logit}^{-1}(1) &= 0.13\\
@@ -236,7 +236,7 @@ If the researcher obtains a large set of data with proportions identical to Pane
 If she assumes the logit link function, then she concludes that $x$ has a large, \textit{negative} effect on $d_{main}$. 
 If she assumes the link function $h$, then she concludes that $x$ has a large, \textit{positive} effect on $d_{main}$. 
 This example clearly highlights how minor errors in model specification can lead to large bias. 
-To demonstrate the potential for bias in a broader collection of situations, we now turn to two simulation studies.
+To show the potential for bias in a broader collection of situations, we now turn to two simulation studies.
 
 \begin{figure}[h]
 \begin{center}
@@ -258,7 +258,7 @@ The simulations clearly show that (1) neither type of misspecification introduce
 \subsection*{Simulation Study 1: Wrong Link Function}
 
 Many researchers view the choice of link function in a model of a binary outcome as an arbitrary, unimportant choice. 
-Berry, DeMeritt, and Esarey (2015) summarize this notion:
+Berry, DeMeritt, and Esarey (2015) summarize this idea:
 \begin{quote}
 In the typical study using binary logit or probit, the theory introduced is not sufficiently specific to imply that logit, probit, or any other functional form is a good fit to the hypothesized DGP. 
 Instead, logit or probit is chosen from among the countless possible functional forms for a model simply because logit and probit have come to be viewed as ``default'' estimators for a binary dependent variable model---making them convenient estimation choices.\footnote{The authors continue in a footnote:
@@ -268,8 +268,8 @@ For example, the 2005 issues of three major journals---American Journal of Polit
 \end{quote}
 We endorse and echo the authors' key point: in the social sciences, researchers rarely have a strong theoretical justification for choosing one functional form over another. 
 
-Given that researchers seldom have a compelling reason to prefer a logit model over a probit model, a cloglog model, or a cauchit model, we would find it especially troubling if the ability of the partial observability model to recover the quantities of interest depends on the researcher choosing the proper link function. 
-Our simulations indeed show exactly this---if the researcher chooses the wrong link function (e.g., uses a partial observability \textit{logit} model for a \textit{cauchit} DGP), then the large-sample estimates can have substantial bias.
+Given that researchers seldom have a compelling reason to prefer a logit model over a probit model, a cloglog model, or a cauchit model, we would find it especially troubling if the ability of the partial observability model to recover the quantity of interest depends on the researcher choosing the proper link function. 
+Our simulations show exactly this---if the researcher chooses the wrong link function (e.g., uses a partial observability \textit{logit} model for a \textit{cauchit} DGP), then the large-sample estimates can have substantial bias.
 
 To assess the large-sample bias of the partial observability model we simulate 500 large data sets for each of our DGPs (i.e., 100 million observations for each unique combination of the values for each explanatory variable). 
 Across each data set, we randomly vary $k_w$, $k_x$, $k_z$, $\beta$, and $\gamma$. 
@@ -304,13 +304,13 @@ Unlike the full observability model, the partial observability model does not gu
 For the cauchit DGP, the 95th percentile for the average absolute bias is about 0.17 and the maximum is about 0.30 when $w_1$ is continuous. When $w_1$ is binary, the 95th percentile is 0.83 and the maximum is 1.12. 
 Though the researcher has made only a small specification error, this small error produces a moderate-to-large bias on average and an enormous bias on occasion. 
 Perhaps most informatively, for the cauchit DGP, the partial observability logit model produces sign errors in 24\% of the simulations when $w_1$ is continuous and in 31\% of the simulations when $w_1$ is binary. 
-That is, when using a partial observability logit model to estimate a cauchit DGP, not only does the estimate converge to the wrong value (i.e., is inconsistent), it converges to a value with the wrong sign!
+That is, when using a partial observability logit model to estimate a cauchit DGP, not only does the estimate converge to the wrong value (i.e., is inconsistent), it often converges to a value with the wrong sign!
 In contrast, the full observability logit model does not produce a single sign error in our simulations, regardless of the DGP.
 
 While the cauchit DGP acts as the worst-case scenario for the partial observability logit model, the biases that emerge for the probit DGP are especially telling. 
 The conventional wisdom suggests that the choice between a logit and probit model is inconsequential. 
 Indeed, King (1998, p. 100) notes in passing that the two link functions ``produce almost identical inferences in practical social science problems.'' 
-This claim holds in the context of full observability (in which King makes the claim), but the partial observability logit model estimates can have substantial bias under a probit DGP. 
+This claim holds in the context of full observability (where King makes the claim), but the partial observability logit model estimates can have substantial bias under a probit DGP. 
 For example, the average absolute bias in the estimates of the partial observability logit model for a probit DGP is about 0.03 for both a continuous and a binary $w_1$, which is about about three times the worst-case scenario under full observability.  
 Perhaps more importantly, the partial observability model has a much higher likelihood of substantial large-sample bias that the full observability model. 
 The 95th percentile of the absolute bias is 0.12 and the maximum is 0.35 when $w_1$ is continuous. When $w_1$ is binary, the 95th percentile is 0.12 and the maximum is 0.55.
@@ -319,23 +319,23 @@ While this potential for bias might be small enough or rare enough to ignore, th
 
 Lastly, notice that substantial large-sample bias does not only occur among models with one or two identifying variables. 
 For the probit DGP, increasing the number of identifying variables ($n_x + n_z$) from one to four shrinks the 95th percentile of the absolute bias from about 0.15 to about 0.10. 
-For the clolog DGP, this same change shrinks the 95th percentile from 0.21 to 0.15. 
+For the cloglog DGP, this same change shrinks the 95th percentile from 0.21 to 0.15. 
 For the cauchit DGP, the 95th percentile shrinks from 0.73 to 0.69. 
 Even with several identifying variables, the potential for bias remains quite large.
  
 While the full observability logit model can estimate the first difference accurately whether the true DGP is logit, probit, cloglog, or cauchit, the partial observability logit model performs noticeably worse for the probit, cloglog, and cauchit DGPs. 
-In particular, a functional form mismatch leads to moderate-to-large bias on average, but dramatically raises the likelihood of an enormous bias, including sign errors.
+In particular, a functional form mismatch leads to moderate-to-large bias on average and dramatically raises the likelihood of an enormous bias, including sign errors.
 
 \subsection*{Simulation Study 2: A Monotonic Relationship}
 
-The simulations in our second set mirror those of Berry, DeMeritt, and Esarey (2015). 
-In these simulations, we assume that the researcher uses the partial observability logit model to estimate a first difference when the DGP is simply some monotonic relationship among the explanatory variables and the probability of an event, so that 
+Our second simulation study mirrors that of Berry, DeMeritt, and Esarey (2015). 
+In these simulations, we assume that the researcher uses the partial observability logit model to estimate a first difference when the DGP is actually some monotonic relationship among the explanatory variables and the probability of an event, so that 
 \begin{gather*}
 \Pr(d_{main}) = p(w)\nonumber\\
 \Pr(d_{nuisance}) = q(w, z) \nonumber\\
 \Pr(y) = \Pr(d_{main})\Pr(d_{nuisance})\text{,}\nonumber
 \end{gather*}
-where $p$ and $q$ are simply monotonic functions of $x$ and $x$ and $z$, respectively.
+where $p$ and $q$ are monotonic functions of $x$ and $x$ and $z$, respectively.
 
 In our view, even the strongest social science theory does not specify the exact functional form relating the explanatory variables to the unobserved outcomes. 
 However, a good theory might specify a monotonic relationship between the explanatory variables and the probability of an event.
@@ -388,7 +388,7 @@ One might suspect that the magnitude of the bias depends on the magnitude of the
 
 \section*{Conclusion}
 
-We demonstrate an under-appreciated but critical characteristic of partial observability models---they are quite sensitive to seemingly innocuous specification errors. 
+We highlight an under-appreciated but critical characteristic of partial observability models---they are quite sensitive to seemingly innocuous specification errors. 
 Even small errors in the functional form can lead to a substantial bias in large samples, including sign errors.
 
 Meng and Schmidt (1985) counseled economists early on regarding some of the costs of partial observability, arguing that standard errors are much larger when the outcome of interest is only partially observed. 
