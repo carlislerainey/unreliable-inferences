@@ -18,7 +18,7 @@ tabs
 figs
 memo
 present
-Old_Files/
+.old/
 !.gitignore
 
 

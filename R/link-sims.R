@@ -1,9 +1,13 @@
 
+# set seed
+set.seed(58724320)
+
 # load packages
 library(VGAM)
 library(dplyr)
 library(ggplot2)
 
+# parameters
 n_trials <- 100000000
 links <- list(logit = logit,
              probit = probit,
@@ -29,6 +33,7 @@ ll__ <- function(param, y, X, Z, n_trials) {
   return(ll)
 }
 
+# maximizer
 pobs <- function(y, X, Z, n_trials, n_tries = 1, m1, m2, ...) {
   tries <- 0
   tried_coef <- 0
@@ -66,10 +71,12 @@ pobs <- function(y, X, Z, n_trials, n_tries = 1, m1, m2, ...) {
     }
   }
   res <- list(beta = beta,
-              gamma = gamma)
+              gamma = gamma,
+              max_lik = max_lik)
   return(res)
 }
 
+# simulations
 df <- NULL
 for (iter in 1:n_iter) {
   n_x <- rpois(1, lambda = 1.5)
@@ -200,7 +207,8 @@ for (iter in 1:n_iter) {
                       fd1 = fd1_full,
                       fd2 = fd2_full,
                       true1 = fd1_true,
-                      true2 = fd2_true)
+                      true2 = fd2_true, 
+                      max_lik = NA)
     df2 <- data.frame(obs = "partial observability", 
                       link = names(links)[link],
                       w1_type = w1_type,
@@ -210,10 +218,12 @@ for (iter in 1:n_iter) {
                       fd1 = fd1_part,
                       fd2 = fd2_part,
                       true1 = fd1_true,
-                      true2 = fd2_true)
+                      true2 = fd2_true, 
+                      max_lik = m$max_lik)
     df <- rbind(df, rbind(df1, df2))
   }
 }
 
+# save simulations
 readr::write_csv(df, "output/link-sims.csv")
 
