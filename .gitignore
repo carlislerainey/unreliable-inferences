@@ -12,10 +12,6 @@
 *.bib.bak 
 *.ttt
 *.fff
-output
-codebooks
-tabs
-figs
 memo
 present
 .old/
