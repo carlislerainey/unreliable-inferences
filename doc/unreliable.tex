@@ -497,47 +497,4 @@ Wang, Tracy Yue. 2013. ``Corporate Securities Fraud: Insights from a New Empiric
 Xiang, Jun. 2010. ``Relevance as a Latent Variable in Dyadic Analysis of Conflict.'' \textit{Journal of Politics} 72:484-498.
 \end{hangparas}
 
-\newpage
-\begin{appendix}
-\begin{center}
-{\LARGE \textbf{Appendix}}
-\end{center}
-\section{Algorithm for Wrong Link Function Simulations}\label{app:link}
-
-\begin{enumerate}
-\item Choose $n_x$ and $n_z$ independently from a Poisson distribution with mean 1.5. If both $n_x$ and $n_z$ equal zero, then set $n_z$ equal to one.
-\item Choose $n_w - 1$ from a Poisson distribution with mean 0.5.
-\item Assign a type (continuous or binary) to each of the $n_x + n_z + n_w$ variables with equal probability. To simplify the computation, continuous variables take on the values 0.0, 0.2, 0.4, 0.6, 0.8, or 1.0, and binary variables take on the values 0 or 1.
-\item To simplify the computation, create a data set $WXZ$ that contains each possible combination of all of the explanatory variables.
-\item Choose the preliminary coefficients $\beta^*$ and $\gamma*$ from a normal distribution. The intercept coefficients come from a normal distribution with mean 0 and standard deviation 2. The slope coefficients come from a normal distribution with mean 0 and standard deviation 1.
-\item If the link function of the DGP is logit, then set $\beta$ equal to $\beta^*$ and $\gamma$ equal to $\gamma^*$. If the link function is some other function $g$, then (1) simulate a large data set from the logit DGP, (2) estimate a model with link function $g$ to that data set, and (3) set $\beta$ and $\gamma$ equal to the estimates $\hat{\beta}$ and $\hat{\gamma}$, respectively. This step scales the coefficients so that the quantities of interest have comparable magnitude regardless of the DGP.
-\item Using the parameters $\beta$ and $\gamma$, simulate 100,000,000 values of $y_{obs}$ and $d_{main}$ for each combination of the explanatory variables.
-\item Fit a full observability model to the outcome variable $d_{main}$. Calculate the first difference as $w_1$ moves from 0 to 1. Store this large-sample estimate.
-\item Fit a partial observability model to the observed outcome variable $y_{obs}$. Calculate the first difference as $w_1$ moves from 0 to 1. Store this large-sample estimate.
-\end{enumerate}
-
-\section{Algorithm for Monotonic Link Function Simulations}\label{app:mon}
-
-\begin{enumerate}
-\item Choose the coefficients for the non-linear, interactive equations.
-\begin{equation}
-\Pr(d_{main}) = \beta_{cons} + \beta_w w + \beta_{w^2} w^2 \nonumber
-\end{equation}
-and 
-\begin{equation}
-\Pr(d_{nuisance}) = \gamma_{cons} + \gamma_w w + + \gamma_z z + \gamma_{w^2} w^2 + \gamma_{z^2} z^2 + \gamma_{wz} wz \text{.}\nonumber
-\end{equation}
-from a uniform distribution that ranges from -1 to 1.
-\item Check that this link function produces a monotonic relationship between the $w$ and $\Pr(d_{main})$ and between $w$ and $z$ $\Pr(d_{nuisance})$. 
-\item Set $w$ as either binary or continuous. For computational ease, continuous variables take on the values 0.0, 0.2, 0.4, 0.6, 0.8, or 1.0, and binary variables take on the values 0 or 1.
-\item Create a data set $WZ$ that contains each possible combination of $w$ and $z$. 
-\item For each row in $WZ$, simulate 100,000,000 values of $y_{obs}$ and $d_{main}$.
-\item Fit a full observability model to the outcome variable $d_{main}$. Calculate the first difference as $w_1$ moves from 0 to 1. Store this large-sample estimate.
-\item Fit a partial observability model to the outcome variable $y_{obs}$. Calculate the first difference as $w_1$ moves from 0 to 1. Store this large-sample estimate.
-\end{enumerate}
-
-
-
-\end{appendix}
-
 \end{document}

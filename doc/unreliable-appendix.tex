@@ -1,0 +1,157 @@
+%
+\documentclass[10pt]{article}
+
+% The usual packages
+\usepackage{fullpage}
+\usepackage{breakcites}
+\usepackage{setspace}
+\usepackage{endnotes}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{rotating}
+\usepackage{dcolumn}
+\usepackage{longtable}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{hyperref}
+%\usepackage[usenames,dvipsnames]{color}
+\usepackage{url}
+\usepackage{natbib}
+\usepackage{framed}
+\usepackage{epigraph}
+\usepackage{lipsum}
+\usepackage{subcaption}
+\usepackage{parskip}
+\usepackage{hanging}
+\usepackage[left]{lineno}
+
+\usepackage[font=small,labelfont=sc]{caption}
+%\restylefloat{table}
+\bibpunct{(}{)}{;}{a}{}{,}
+
+% place figures at the end
+\usepackage{endfloat}
+\renewcommand{\listoffigures}{} % but suppress these lists
+\renewcommand{\listoftables}{} % suppress these lists
+
+% Set paragraph spacing the way I like
+\parskip=0pt
+\parindent=20pt
+
+% Define mathematical results
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}{Claim}
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+% Set up fonts the way I like
+%\usepackage{tgpagella}
+%\usepackage[T1]{fontenc}
+%\usepackage[bitstream-charter]{mathdesign}
+
+%% Set up lists the way I like
+% Redefine the first level
+\renewcommand{\theenumi}{\arabic{enumi}.}
+\renewcommand{\labelenumi}{\theenumi}
+% Redefine the second level
+\renewcommand{\theenumii}{\alph{enumii}.}
+\renewcommand{\labelenumii}{\theenumii}
+% Redefine the third level
+\renewcommand{\theenumiii}{\roman{enumiii}.}
+\renewcommand{\labelenumiii}{\theenumiii}
+% Redefine the fourth level
+\renewcommand{\theenumiv}{\Alph{enumiv}.}
+\renewcommand{\labelenumiv}{\theenumiv}
+% Eliminate spacing around lists
+\usepackage{enumitem}
+\setlist{nolistsep}
+
+% Create footnote command so that my name
+% has an asterisk rather than a one.
+\long\def\symbolfootnote[#1]#2{\begingroup%
+\def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup}
+
+% Create the colors I want
+\usepackage{color}
+\definecolor{darkred}{RGB}{100,0,0}
+
+\hypersetup{
+pdftitle={Unreliable Inferences about Unobserved Processes}, % title
+pdfauthor={Carlisle Rainey and Robert A. Jackson}, % author
+pdfkeywords={partial observability} {split population}
+pdfnewwindow=true, % links in new window
+colorlinks=true, % false: boxed links; true: colored links
+linkcolor=black, % color of internal links
+citecolor=black, % color of links to bibliography
+filecolor=black, % color of file links
+urlcolor=blue % color of external links
+}
+
+% enable comments in pdf
+\newcommand{\kelly}[1]{\textcolor{darkred}{#1}}
+\newcommand{\carlisle}[1]{\textcolor{magenta}{#1}}
+
+% April 6 Statistics Politics Policy submission
+\begin{document}
+%\linenumbers
+\begin{center}
+{\LARGE \textbf{Appendix}}\\\vspace{4mm}
+
+{\large \textbf{Unreliable Inferences about Unobserved Processes}}
+
+\vspace{10mm}
+
+Carlisle Rainey\symbolfootnote[2]{Carlisle Rainey is Assistant Professor of Political Science, Texas A\&M University, 2010 Allen Building, College Station, TX, 77843 (\href{mailto:crainey@tamu.edu}{crainey@tamu.edu}).}
+
+\vspace{3mm}
+
+Robert A. Jackson\symbolfootnote[3]{Robert A. Jackson is Professor of Political Science, Florida State University, 531 Bellamy Building, Florida State University, Tallahassee, FL 32306 (\href{mailto:rjackson@fsu.edu}{rjackson@fsu.edu}).}
+\end{center}
+
+\vspace{10mm}
+
+\section{Algorithm for Wrong Link Function Simulations}\label{app:link}
+
+\begin{enumerate}
+\item Choose $n_x$ and $n_z$ independently from a Poisson distribution with mean 1.5. If both $n_x$ and $n_z$ equal zero, then set $n_z$ equal to one.
+\item Choose $n_w - 1$ from a Poisson distribution with mean 0.5.
+\item Assign a type (continuous or binary) to each of the $n_x + n_z + n_w$ variables with equal probability. To simplify the computation, continuous variables take on the values 0.0, 0.2, 0.4, 0.6, 0.8, or 1.0, and binary variables take on the values 0 or 1.
+\item To simplify the computation, create a data set $WXZ$ that contains each possible combination of all of the explanatory variables.
+\item Choose the preliminary coefficients $\beta^*$ and $\gamma*$ from a normal distribution. The intercept coefficients come from a normal distribution with mean 0 and standard deviation 2. The slope coefficients come from a normal distribution with mean 0 and standard deviation 1.
+\item If the link function of the DGP is logit, then set $\beta$ equal to $\beta^*$ and $\gamma$ equal to $\gamma^*$. If the link function is some other function $g$, then (1) simulate a large data set from the logit DGP, (2) estimate a model with link function $g$ to that data set, and (3) set $\beta$ and $\gamma$ equal to the estimates $\hat{\beta}$ and $\hat{\gamma}$, respectively. This step scales the coefficients so that the quantities of interest have comparable magnitude regardless of the DGP.
+\item Using the parameters $\beta$ and $\gamma$, simulate 100,000,000 values of $y_{obs}$ and $d_{main}$ for each combination of the explanatory variables.
+\item Fit a full observability model to the outcome variable $d_{main}$. Calculate the first difference as $w_1$ moves from 0 to 1. Store this large-sample estimate.
+\item Fit a partial observability model to the observed outcome variable $y_{obs}$. Calculate the first difference as $w_1$ moves from 0 to 1. Store this large-sample estimate.
+\end{enumerate}
+
+\section{Algorithm for Monotonic Link Function Simulations}\label{app:mon}
+
+\begin{enumerate}
+\item Choose the coefficients for the non-linear, interactive equations.
+\begin{equation}
+\Pr(d_{main}) = \beta_{cons} + \beta_w w + \beta_{w^2} w^2 \nonumber
+\end{equation}
+and 
+\begin{equation}
+\Pr(d_{nuisance}) = \gamma_{cons} + \gamma_w w + + \gamma_z z + \gamma_{w^2} w^2 + \gamma_{z^2} z^2 + \gamma_{wz} wz \text{.}\nonumber
+\end{equation}
+from a uniform distribution that ranges from -1 to 1.
+\item Check that this link function produces a monotonic relationship between the $w$ and $\Pr(d_{main})$ and between $w$ and $z$ $\Pr(d_{nuisance})$. 
+\item Set $w$ as either binary or continuous. For computational ease, continuous variables take on the values 0.0, 0.2, 0.4, 0.6, 0.8, or 1.0, and binary variables take on the values 0 or 1.
+\item Create a data set $WZ$ that contains each possible combination of $w$ and $z$. 
+\item For each row in $WZ$, simulate 100,000,000 values of $y_{obs}$ and $d_{main}$.
+\item Fit a full observability model to the outcome variable $d_{main}$. Calculate the first difference as $w_1$ moves from 0 to 1. Store this large-sample estimate.
+\item Fit a partial observability model to the outcome variable $y_{obs}$. Calculate the first difference as $w_1$ moves from 0 to 1. Store this large-sample estimate.
+\end{enumerate}
+
+\end{document}
