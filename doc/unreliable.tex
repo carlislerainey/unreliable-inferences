@@ -106,7 +106,7 @@ urlcolor=blue % color of external links
 %\linenumbers
 \begin{center}
 {\LARGE \textbf{Unreliable Inferences about Unobserved Processes}\\\vspace{2mm}
-{\large \textbf{A Critique of Partial Observability Models}}\symbolfootnote[1]{We thank Will Moore, Austin Mitchell, participants at the 2012 Southern Political Science Association Annual Conference, and participants at the 2012 Midwest Political Science Association Annual Conference for valuable comments on previous versions of the manuscript. All code and data necessary to replicate the simulations and empirical analysis are available at \url{http://github.com/carlislerainey/unreliable-inferences}.}}
+{\large \textbf{A Critique of Partial Observability Models}}\symbolfootnote[1]{We thank Will Moore, Austin Mitchell, participants at the 2012 Southern Political Science Association Annual Conference, and participants at the 2012 Midwest Political Science Association Annual Conference for valuable comments on previous versions of the manuscript. All code and data necessary to replicate the simulations are available at \url{http://github.com/carlislerainey/unreliable-inferences}.}}
 
 \vspace{10mm}
 
@@ -163,25 +163,18 @@ Unfortunately, we have no simple solution to this problem. This is not a methodo
 
 \section*{A Partial Observability Logit Model}
 
-Partial observability occurs when the researcher only observes a binary outcome of interest $d_{main}$ jointly with another binary outcome $d_{nuisance}$.\footnote{For clarity, we imagine a situation where one outcome is of interest and the other is largely nuisance. 
-However, our ideas generalize to a situation where the researcher's interest extends to both outcomes.}
-The researcher directly observes the binary outcome $y_{obs}$, which equals one if both $d_{main}$ and $d_{nuisance}$ equal one and zero otherwise.\footnote{One can also employ a partial observability model where $y_{obs}$ equals one if either $d_{main}$ or $d_{nuisance}$ equals one. 
-For simplicity, we focus on a situation where $y_{obs}$ equals one if both $d_{main}$ and $d_{nuisance}$ equal one. 
+Partial observability occurs when the researcher only observes a binary outcome of interest $d_{main}$ jointly with another binary outcome $d_{nuisance}$.\footnote{For clarity, we imagine a situation where one outcome is of interest and the other is nuisance. 
+However, our ideas generalize to two outcomes of interest.}
+The researcher directly observes the binary outcome $y_{obs}$, which equals one if both $d_{main}$ and $d_{nuisance}$ equal one and zero otherwise.\footnote{An alternative partial observability model assumes $y_{obs}$ equals one if either $d_{main}$ or $d_{nuisance}$ equal one. 
 Our conclusions do not depend on this choice.}
 
-To model the observed outcome $y_{obs}$, we assume that $d_{main}$ and $d_{nuisance}$ are independent events so that $\Pr(y_{obs}) = \Pr(d_{main})\Pr(d_{nuisance})$.\footnote{Especially in the case of the partial observability probit model, the researcher can relax the assumption of independence. 
-We make the assumption of independence to simplify the presentation and the computation.} 
+To model the observed outcome $y_{obs}$, we assume that $d_{main}$ and $d_{nuisance}$ are independent events so that $\Pr(y_{obs}) = \Pr(d_{main})\Pr(d_{nuisance})$.
 Next, we assume a standard model relating a set of covariates $X = [1, w_1, w_2,..., w_{k_w}, x_1, x_2,..., x_{k_x}]$ to $\Pr(d_{main})$ and a set of covariates $Z = [1, w_1, w_2,..., w_{k_w}, z_1, z_2,..., z_{k_z}]$ to $\Pr(d_{nuisance})$, so that $\Pr(d_{main}) = g^{-1}(X\beta)$ and $\Pr(d_{nuisance}) = g^{-1}(Z\gamma)$.
 Note that the covariates $w_j$ for $j \in \{1, 2,..., k_w\}$ belong to both $X$ and $Z$. 
-This is crucial---our critique focuses on the situation in which the researcher wishes to parse out the distinct effects of one or more explanatory variables on \textit{both} unobservable outcome variables.\footnote{Even if a researcher \textit{assumes} that each explanatory variable influences only one of the observable outcomes, she usually only has a weak theory guiding the choice and no empirical tools to verify the assumption.} 
+This is crucial---our critique focuses on the situation in which the researcher wishes to parse out the distinct effects of one or more explanatory variables on \textit{both} unobservable outcome variables. 
 The researcher's theory rarely offers a compelling rationale for a particular link function $g$, making the choice essentially arbitrary (King 1998, p. 100, and Berry, DeMeritt, and Esarey 2010).
 In our partial observability model, we let $g$ be the logit function, but other standard choices include probit, cloglog, and cauchit.
-Using this form, it is straightforward to find the log-likelihood function for $\beta$ and $\gamma$, although the maximization is not trivial.\footnote{We find that standard hill-climbing optimization routines find local maxima. 
-This presents a separate, perhaps equally concerning problem for substantive applications. 
-To avoid this, we tried an algorithm suggested by Sekhon and Mebane (1998) that relies on a combination of genetic adaptation and hill-climbing to efficiently locate the maximum (Mebane and Sekhon 2011). 
-This approach consistently located the global maximum in several trial examples, but only for a very large population (i.e., computationally prohibitive) of agents. 
-We found that starting a standard hill-climbing algorithm at several sets of random starting values consistently located the global maximum. 
-We use ten sets of starting values in our estimation.} 
+Using this form, it is straightforward to find the log-likelihood function for $\beta$ and $\gamma$, although the maximization is not trivial. 
 We assume that the researcher uses the estimates of $\beta$ and $\gamma$ to calculate some quantity of interest (e.g., first difference). 
 As a comparison, we also consider a full observability logit model (i.e., the usual logit model), in which the researcher observes $d_{main}$ and uses the model $\Pr(d_{main}) = \text{logit}^{-1}(X\beta)$ to estimate the quantity of interest.
 
@@ -267,10 +260,7 @@ Many researchers view the choice of link function in a model of a binary outcome
 Berry, DeMeritt, and Esarey (2015) summarize this idea:
 \begin{quote}
 In the typical study using binary logit or probit, the theory introduced is not sufficiently specific to imply that logit, probit, or any other functional form is a good fit to the hypothesized DGP. 
-Instead, logit or probit is chosen from among the countless possible functional forms for a model simply because logit and probit have come to be viewed as ``default'' estimators for a binary dependent variable model---making them convenient estimation choices.\footnote{The authors continue in a footnote:
-\begin{quote}
-For example, the 2005 issues of three major journals---\textit{American Journal of Political Science} (\textit{AJPS}), \textit{American Political Science Review} (\textit{APSR}), and \textit{The Journal of Politics} (\textit{JOP})---contain 49 articles studying binary dependent variables with logit or probit; 30 of these articles offer no defense for their choice of logit or probit; ten other papers defend their choice, but solely by noting that the dependent variable is dichotomous. 
-\end{quote}}
+Instead, logit or probit is chosen from among the countless possible functional forms for a model simply because logit and probit have come to be viewed as ``default'' estimators for a binary dependent variable model---making them convenient estimation choices.
 \end{quote}
 We endorse and echo the authors' key point: in the social sciences, researchers rarely have a strong theoretical justification for choosing one functional form over another. 
 
@@ -291,7 +281,7 @@ We also randomly vary the type of each explanatory variable, either binary or co
 For each random set of simulation parameters, we simulate a large data set using logit, probit, cloglog, and cauchit DGPs.  
 For each DGP, we rescale the coefficients $\beta^*$ and $\gamma^*$ so that the true first differences are approximately equal across DGPs.
 For each data set, we use the partial observability logit model to estimate the first difference as the key explanatory variable $w_1$ varies from its minimum to its maximum (i.e., zero to one). 
-Section \ref{app:link} of the Appendix summarizes the details of the algorithm.
+Section 1 of the Appendix summarizes the details of the algorithm.
 
 Figure \ref{fig:link} shows the large-sample estimates of the first difference. 
 The left-hand column shows the relationship between the estimated effect and true effect under full observability, where misspecifying the link function has almost no effect on the inferences. 
@@ -376,10 +366,10 @@ Following Berry, DeMeritt, and Esarey (2015), we simulate a pool of 2,000 DGPs t
 \noindent To choose the coefficients, $\beta$ and $\gamma$ are drawn from a uniform$(-1, 1)$ distribution. 
 Values that do not meet the monotonicity condition are discarded.
 
-As before, we simulate a dataset with 100 million observations for every possible combination of covariate values for each DGP. 
+As before, we simulate a large dataset (i.e., 100 million observations) for every possible combination of covariate values for each DGP. 
 We use this data set to estimate the full and partial observability logit models.
 Finally, we compare these large-sample estimates of the quantity of interest to the true value.
-As before, we focus on the ability of the partial observability model to recover the change in the probability of $d_{main}$ as $w$ moves from its minimum to its maximum (0, 1). Section \ref{app:mon} of the Appendix summarizes the details of the algorithm.
+As before, we focus on the ability of the partial observability model to recover the change in the probability of $d_{main}$ as $w$ moves from its minimum to its maximum (0, 1). Section 2 of the Appendix summarizes the details of the algorithm.
 
 Figure \ref{fig:mon-sims} shows the results. 
 The left-hand column shows the full observability logit model estimates of the first difference. 
